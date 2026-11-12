@@ -30,19 +30,27 @@ public class DesktopMovementControls : MovementControlsBase
     {
         get
         {
+            float roll;
             if (Input.GetKey(KeyCode.A))
             {
-                return 1f;
+                roll = 1f;
 
             }
-            return Input.GetKey(KeyCode.D) ? -1f : 0f;
+            else
+            {
+                roll = Input.GetKey(KeyCode.D) ? -1f : 0f;
+            }
+            _rollAmount = Mathf.Lerp(_rollAmount, roll, Time.deltaTime * 3f);
+            return _rollAmount;
         }
     }
     //basic thruster, heading to use s and w as stepped thruster
     //public override float thrustAmount => Input.GetAxis("Vertical");
     //stepped thruster
     float _thrustAmount = 0f;
-    [SerializeField] float _thrustStep = 0.25f;
+    [SerializeField] float _thrustStep = 0.5f;
+    private float _rollAmount;
+
     public override float thrustAmount
     {
         get
@@ -55,7 +63,8 @@ public class DesktopMovementControls : MovementControlsBase
             {
                 _thrustAmount -= _thrustStep;
             }
-            return Mathf.Clamp01(_thrustAmount);
+            _thrustAmount = Mathf.Clamp(_thrustAmount, 0f, 2f);
+            return _thrustAmount;
         }
     }
 

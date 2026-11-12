@@ -11,12 +11,12 @@ public class ShipController : MonoBehaviour
     [Header("Movement values")]
     //engine thrust
     [SerializeField]
-    [Range(1000f, 10000f)]
+    [Range(1000f, 12000f)]
     float _thrustForce = 10000f;
     //up-down
     [SerializeField]
     [Range(1000f, 10000f)]
-    float _pitchForce = 3000f;
+    float _pitchForce = 2000f;
     //rolling
     [SerializeField]
     [Range(1000f, 10000f)]
@@ -30,7 +30,7 @@ public class ShipController : MonoBehaviour
     Rigidbody _rigidbody;
 
     [Header("Simulation values")]
-    [Range(-1f, 1f)]
+    [Range(0f, 2f)]
     [SerializeField] float _thrustAmount = 0f;
 
     [Range(-1f, 1f)]
