@@ -9,9 +9,16 @@ public class ShipMovementInput : MonoBehaviour
     public iMovementControls MovementControls {  get; private set; }
     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         MovementControls = ShipInputManager.GetInputcontrols(_inputType);
+    }
+    private void Update()
+    {
+        if (MovementControls is DesktopMovementControls desktopControls)
+        {
+            desktopControls.UpdateThrust();
+        }
     }
     private void OnDestroy()
     {

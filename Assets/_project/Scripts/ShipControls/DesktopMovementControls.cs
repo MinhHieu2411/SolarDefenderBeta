@@ -55,17 +55,20 @@ public class DesktopMovementControls : MovementControlsBase
     {
         get
         {
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                _thrustAmount += _thrustStep;
-            }
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                _thrustAmount -= _thrustStep;
-            }
-            _thrustAmount = Mathf.Clamp(_thrustAmount, 0f, 2f);
             return _thrustAmount;
         }
+    }
+    public void UpdateThrust()
+    {
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            _thrustAmount += _thrustStep;
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            _thrustAmount -= _thrustStep;
+        }
+        _thrustAmount = Mathf.Clamp(_thrustAmount, 0f, 2f);
     }
 
 }
