@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3711d84b9615d9545a600ee273487ee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _launchForce: 15000
+  _launchForce: 25000
   _damage: 100
   _range: 5
 --- !u!1 &3126974871918949997

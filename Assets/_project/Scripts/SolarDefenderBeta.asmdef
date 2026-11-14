@@ -1,3 +1,16 @@
 {
-	"name": "SolarDefenderBeta"
+    "name": "SolarDefenderBeta",
+    "rootNamespace": "",
+    "references": [
+        "GUID:99bfaba8d36ea544fa9d0aece78e5fcf"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
