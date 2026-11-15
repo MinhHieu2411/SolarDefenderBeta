@@ -23,5 +23,10 @@ public class Asteroid : MonoBehaviour, iDamageable
         {
             Instantiate(_fractureAsteroidPrefab, _transform.position, _transform.rotation);
         }
+        if(_explosionPrefab != null)
+        {
+            Instantiate(_explosionPrefab, hitPosition, Quaternion.identity);
+        }
+        Destroy(gameObject);
     }
 }

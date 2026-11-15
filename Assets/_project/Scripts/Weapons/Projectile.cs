@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [Range(5000f, 50000f)] [SerializeField] float _launchForce = 25000f;
+    [Range(5000f, 50000f)] [SerializeField] float _launchForce = 12000f;
 
     [Range(10, 1000)] [SerializeField] int _damage = 100;
 
-    [Range(2f, 10f)] [SerializeField] float _range = 5f;
+    [Range(2f, 10f)] [SerializeField] float _range = 2f;
 
     bool OutOfFuel
     {
@@ -37,6 +37,11 @@ public class Projectile : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log($"projectile collided with {collision.collider.name}");
+        iDamageable damageable = collision.collider.gameObject.GetComponent<iDamageable>();
+        if(damageable != null)
+        {
+            Vector3 hitPosition = collision.GetContact(0).point;
+            damageable.TakeDamage(_damage, hitPosition);
+        }
     }
 }

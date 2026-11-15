@@ -5,7 +5,7 @@ using UnityEngine;
 public class DesktopMovementControls : MovementControlsBase
 {
     //limit the cursor zone when transform to movements
-    [SerializeField] float _deadZoneRadius = 0.1f;
+    [SerializeField] float _deadZoneRadius = 0.05f;
     Vector2 screenCenter => new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
 
     public override float yawAmount

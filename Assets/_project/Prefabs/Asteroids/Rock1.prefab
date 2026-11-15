@@ -21,7 +21,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2752708976208906211
 Transform:
   m_ObjectHideFlags: 0
@@ -130,9 +130,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5120006434088442908}
   serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 10
+  m_Drag: 0.2
+  m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -148,7 +148,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &2313484088643488187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,3 +161,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3b57328d4916c43afec7060560fb3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fractureAsteroidPrefab: {fileID: 7882380887710349229, guid: 7dc8c343d6e58b542a4a74ededed89de, type: 3}
+  _explosionPrefab: {fileID: 1397999130322104930, guid: 00f5350b2b81dbf429b6ce950ca4dd13, type: 3}

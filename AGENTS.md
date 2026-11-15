@@ -2,7 +2,7 @@
 - Project name: SolarDefenderBeta
 - Unity version: Unity 2022.3.62f2
 - Active game object:
-  - Name: Rock1
+  - Name:  Player Cursor
   - Tag: Untagged
-  - Layer: Asteroid
+  - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
