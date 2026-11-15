@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
     [Range(10, 1000)] [SerializeField] int _damage = 100;
 
     [Range(2f, 10f)] [SerializeField] float _range = 2f;
+    [SerializeField] Detonator _hitEffect;
 
     bool OutOfFuel
     {
@@ -43,5 +44,10 @@ public class Projectile : MonoBehaviour
             Vector3 hitPosition = collision.GetContact(0).point;
             damageable.TakeDamage(_damage, hitPosition);
         }
+        if (_hitEffect != null)
+        {
+            Instantiate(_hitEffect, transform.position, Quaternion.identity);
+        }
+        Destroy(gameObject);
     }
 }
