@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -8,8 +9,10 @@ public class Blaster : MonoBehaviour
     [SerializeField] Projectile _projectilePrefab;
 
     [SerializeField] Transform _muzzle;
-
-    [Range(0f, 5f)] [SerializeField] float _coolDownTime = 0.2f;
+    int _damage;
+    float _coolDown, _launchForce, _duration;
+    float _coolDownTime;
+    iWeaponControls _weaponInput;
 
     bool CanFire
     {
@@ -19,18 +22,32 @@ public class Blaster : MonoBehaviour
             return _coolDown <= 0f;
         }
     }
-    float _coolDown;
     // Update is called once per frame
     void Update()
     {
-        if(CanFire && Input.GetMouseButton(0))
+        if (_weaponInput == null) return;
+        if(CanFire && _weaponInput.PrimaryWeapon)
         {
             FireProjectile();
-        }  
+        }
     }
+    internal void Init(iWeaponControls weaponInput, float coolDown, float blasterLauncheForce, float blasterDuration, int blasterDamage)
+    {
+        _weaponInput = weaponInput;
+        _coolDownTime = coolDown;
+        _launchForce = blasterLauncheForce;
+        _duration = blasterDuration;
+        _damage = blasterDamage;
+    }
+
     void FireProjectile()
     {
         _coolDown = _coolDownTime;
-        Instantiate(_projectilePrefab, _muzzle.position, transform.rotation);
+        Projectile projectile = Instantiate(_projectilePrefab, _muzzle.position, transform.rotation);
+        projectile.gameObject.SetActive(false);
+        projectile.Init(_launchForce, _damage, _duration);
+        projectile.gameObject.SetActive(true);
+
     }
+
 }

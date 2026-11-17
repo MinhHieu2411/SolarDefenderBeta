@@ -1,4 +1,6 @@
-public abstract class MovementControlsBase : iMovementControls
+using UnityEngine;
+
+public abstract class MovementControlsBase : MonoBehaviour, iMovementControls
 {
     public abstract float yawAmount { get; }
     public abstract float pitchAmount { get; }

@@ -1631,51 +1631,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &1384337929804111116
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 409759931984497658}
-  - component: {fileID: 1714634965844287010}
-  m_Layer: 12
-  m_Name: ShipMovementInput
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &409759931984497658
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1384337929804111116}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5958083423562118923}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1714634965844287010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1384337929804111116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23d9d87cf6d6dbe4fb3b9756f6036ea6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _inputType: 0
 --- !u!1 &1387293635784156144
 GameObject:
   m_ObjectHideFlags: 0
@@ -5486,7 +5441,7 @@ GameObject:
   - component: {fileID: 1024341082090088673}
   - component: {fileID: 8217782718840414065}
   m_Layer: 12
-  m_Name: Player Fighter
+  m_Name: Player Fighter Gray
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5523,7 +5478,6 @@ Transform:
   - {fileID: 3750980132577684824}
   - {fileID: 1395807770214185997}
   - {fileID: 5558183203738182795}
-  - {fileID: 409759931984497658}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &9078751338961395577
@@ -5565,14 +5519,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 922014335f65f5646b6d2ec03c7e9823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementInput: {fileID: 1714634965844287010}
-  _thrustForce: 6000
-  _pitchForce: 2000
-  _rollForce: 3000
-  _yawForce: 2000
+  _inputControls: {fileID: 0}
+  _shipData: {fileID: 11400000, guid: 3f0ab5fe65319a246ad16fec967f8fc6, type: 2}
   _engines:
   - {fileID: 1803832988068973176}
   - {fileID: 4800721727283931598}
+  _blasters:
+  - {fileID: 714790599032012666}
+  - {fileID: 7363876365634691859}
   _cockpitControls: {fileID: 7085653676030191217}
   _pitchAmount: 0
   _rollAmount: 0
@@ -11889,7 +11843,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _projectilePrefab: {fileID: -8324033813371328611, guid: 4319b107587a300438a84085a12051d6, type: 3}
   _muzzle: {fileID: 6181298072359044105}
-  _coolDownTime: 0.2
 --- !u!1 &7495408011136497150
 GameObject:
   m_ObjectHideFlags: 0
@@ -12209,7 +12162,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _projectilePrefab: {fileID: -8324033813371328611, guid: 4319b107587a300438a84085a12051d6, type: 3}
   _muzzle: {fileID: 2478721532494444416}
-  _coolDownTime: 0.2
 --- !u!1 &7635225085938920827
 GameObject:
   m_ObjectHideFlags: 0
@@ -13233,14 +13185,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8537461134399682097}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.03533562, y: 0, z: 0, w: 0.9993755}
+  m_LocalRotation: {x: -0.0011343815, y: 0, z: 0, w: 0.9999994}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4508324086864802966}
   m_Father: {fileID: 1286856843399202029}
-  m_LocalEulerAnglesHint: {x: -4.05, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -0.13, y: 0, z: 0}
 --- !u!114 &7846747762973357335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13262,7 +13214,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 73.83
+    FieldOfView: 73.16
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000

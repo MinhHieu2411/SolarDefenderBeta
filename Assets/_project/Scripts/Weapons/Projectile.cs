@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [Range(5000f, 50000f)] [SerializeField] float _launchForce = 12000f;
-
-    [Range(10, 1000)] [SerializeField] int _damage = 100;
-
-    [Range(2f, 10f)] [SerializeField] float _range = 2f;
+    float _launchForce;
+    int _damage;
+    float _range;
+    float _duration;
+    Rigidbody _rigidBody;
     [SerializeField] Detonator _hitEffect;
 
     bool OutOfFuel
@@ -20,8 +20,6 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    Rigidbody _rigidBody;
-    float _duration;
     private void Awake()
     {
         _rigidBody = GetComponent<Rigidbody>();
@@ -32,9 +30,20 @@ public class Projectile : MonoBehaviour
         _rigidBody.AddForce(_launchForce *transform.forward);
         _duration = _range;
     }
+    private void OnDisable()
+    {
+        _rigidBody.velocity = Vector3.zero;
+        _rigidBody.angularVelocity = Vector3.zero;
+    }
     private void Update()
     {
         if (OutOfFuel) Destroy(gameObject);
+    }
+    public void Init(float launchForce,int damage, float range)
+    {
+        _launchForce = launchForce;
+        _damage = damage;
+        _range = range;
     }
     private void OnCollisionEnter(Collision collision)
     {

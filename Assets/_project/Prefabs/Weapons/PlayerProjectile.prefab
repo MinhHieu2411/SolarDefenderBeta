@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3055640578064543545}
   - component: {fileID: 6195890675828273596}
   - component: {fileID: -8324033813371328611}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,9 +203,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3711d84b9615d9545a600ee273487ee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _launchForce: 12000
-  _damage: 100
-  _range: 2
   _hitEffect: {fileID: 2543583538991610481, guid: 690a38662b88a274c8bb9c0b11aa10eb, type: 3}
 --- !u!1 &3126974871918949997
 GameObject:
@@ -217,7 +214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2347502281524084594}
   - component: {fileID: 3257923374906596761}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -312,7 +309,7 @@ GameObject:
   - component: {fileID: 5646388089405835608}
   - component: {fileID: 4465558078293591183}
   - component: {fileID: 784440493052100277}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}

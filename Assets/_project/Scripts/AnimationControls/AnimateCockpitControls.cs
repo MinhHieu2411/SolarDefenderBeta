@@ -14,18 +14,18 @@ public class AnimateCockpitControls : MonoBehaviour
 
     //[SerializeField] ShipMovementInput _movementInput;
 
-    iMovementControls _movementControls;
+    iMovementControls _movementInput;
     void Update()
     {
-        if (_movementControls == null) return;
+        if (_movementInput == null) return;
         _joystick.localRotation = Quaternion.Euler(
-            _movementControls.pitchAmount * _joystickRange.x,
-            _movementControls.yawAmount * _joystickRange.y,
-            _movementControls.rollAmount * _joystickRange.z
+            _movementInput.pitchAmount * _joystickRange.x,
+            _movementInput.yawAmount * _joystickRange.y,
+            _movementInput.rollAmount * _joystickRange.z
             );
 
         Vector3 throttleRotation = _throttles[0].localRotation.eulerAngles;
-        throttleRotation.x = _movementControls.thrustAmount * _throttleRange;
+        throttleRotation.x = _movementInput.thrustAmount * _throttleRange;
         foreach(Transform throttle in _throttles)
         {
             throttle.localRotation = Quaternion.Euler(throttleRotation);
@@ -34,6 +34,6 @@ public class AnimateCockpitControls : MonoBehaviour
     }
     public void Init(iMovementControls movementControls)
     {
-        _movementControls = movementControls;
+        _movementInput = movementControls;
     }
 }
