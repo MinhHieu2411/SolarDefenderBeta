@@ -1,4 +1,3 @@
-
 using System;
 using UnityEngine;
 
@@ -11,30 +10,22 @@ public class PIDController
         ErrorRateOfChange
     }
 
-    [Header("PID Parameters")]
-    [SerializeField] private float _proportionalGain;
-    [SerializeField] private float _integralGain;
-    [SerializeField] private float _derivativeGain;
-
-    [Header("Output Limits")]
-    [SerializeField] private float _minOutput;
-    [SerializeField] private float _maxOutput;
-
-    [Header("Integral Settings")]
-    [SerializeField] private float _integralSaturation;
-
-    [Header("Derivative Settings")]
     [SerializeField]
-    private DerivativeMeasurement _derivativeMeasurement;
+    float
+        _proportionalGain = 0.5f,
+        _integralGain,
+        _derivativeGain = 0.1f,
+        _minOutput = -1f,
+        _maxOutput = 1f,
+        _integralSaturation;
 
-    [Header("PID Control")]
-    [SerializeField] private bool _enablePid = true;
+    [SerializeField]
+    DerivativeMeasurement _derivativeMeasurement;
 
-    public float _lastValue;
-    public float _lastError;
-    public float _integrationStored;
-    public float _velocity;
+    [SerializeField]
+    private bool _enablePid = true;
 
+    public float _lastValue, _lastError, _integrationStored, _velocity;
     private bool _derivativeInitialized;
 
     public void Reset()
@@ -45,45 +36,37 @@ public class PIDController
     public float Update(float deltaTime, float currentValue, float targetValue)
     {
         if (!_enablePid) return targetValue;
-
-        if (deltaTime <= 0)
-            throw new ArgumentOutOfRangeException(nameof(deltaTime));
+        if (deltaTime <= 0) throw new ArgumentOutOfRangeException(nameof(deltaTime));
 
         float error = targetValue - currentValue;
 
-        // Proportional term
+        //proportional term
         float P = _proportionalGain * error;
 
-        // Integral term
-        _integrationStored = Mathf.Clamp(
-            _integrationStored + (error * deltaTime),
-            -_integralSaturation,
-            _integralSaturation
-        );
-
+        //integral term
+        _integrationStored = Mathf.Clamp(_integrationStored + (error * deltaTime), -_integralSaturation, _integralSaturation);
         float I = _integralGain * _integrationStored;
 
-        // Derivative calculations
+        //derivative calculate
         float errorRateOfChange = (error - _lastError) / deltaTime;
         _lastError = error;
 
         float valueRateOfChange = (currentValue - _lastValue) / deltaTime;
         _lastValue = currentValue;
-
         _velocity = valueRateOfChange;
 
-        // Select derivative measurement
-        float derivativeMeasure = 0f;
+        //derivative measurement
+        float deriveMeasure = 0;
 
         if (_derivativeInitialized)
         {
             if (_derivativeMeasurement == DerivativeMeasurement.Velocity)
             {
-                derivativeMeasure = -valueRateOfChange;
+                deriveMeasure = -valueRateOfChange;
             }
             else
             {
-                derivativeMeasure = errorRateOfChange;
+                deriveMeasure = errorRateOfChange;
             }
         }
         else
@@ -91,10 +74,8 @@ public class PIDController
             _derivativeInitialized = true;
         }
 
-        // Derivative term
-        float D = _derivativeGain * derivativeMeasure;
+        float D = _derivativeGain * deriveMeasure;
 
-        // PID output
         float result = P + I + D;
 
         return Mathf.Clamp(result, _minOutput, _maxOutput);
