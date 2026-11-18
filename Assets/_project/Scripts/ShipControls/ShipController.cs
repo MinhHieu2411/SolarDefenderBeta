@@ -52,6 +52,10 @@ public class ShipController : MonoBehaviour
             blaster.Init(WeaponInput, _shipData.BlasterCoolDown,_shipData.BlasterLaunchForce, _shipData.BlasterProjectileDuration, _shipData.BlasterDamage);
         }
         //_cockpitControls.Init(MovementInput);
+        if (_cockpitControls != null)
+        {
+            _cockpitControls.Init(MovementInput);
+        }
         
     }
 
@@ -83,5 +87,10 @@ public class ShipController : MonoBehaviour
         {
             _rigidbody.AddForce(transform.forward * (_thrustForce * _thrustAmount * Time.fixedDeltaTime));
         }*/
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log($"{gameObject.name} collided with {collision.collider.name}");
     }
 }
