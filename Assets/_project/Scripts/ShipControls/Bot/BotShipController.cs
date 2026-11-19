@@ -59,7 +59,7 @@ public class BotShipController : MonoBehaviour
     {
         if (_damageHandler == null) return;
         _damageHandler.Init(_shipData.MaxHealth);
-        _damageHandler.HealthChanged.AddListener(OnHealthChanged);
+        //_damageHandler.HealthChanged.AddListener(OnHealthChanged);
         _damageHandler.ObjectDestroyEvent.AddListener(DestroyShip);
     }
     void Update()

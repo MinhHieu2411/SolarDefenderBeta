@@ -33,7 +33,9 @@ public class AnimateCockpitControls : MonoBehaviour
 
     }
     public void Init(iMovementControls movementControls)
+
     {
+        if (_movementInput == null) return;
         _movementInput = movementControls;
     }
 }

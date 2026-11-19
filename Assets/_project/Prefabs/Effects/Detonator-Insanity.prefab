@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 7152743472338669758}
   - component: {fileID: 2315428900269940421}
   - component: {fileID: 5894328530654076534}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Detonator-Insanity
   m_TagString: Untagged
   m_Icon: {fileID: 0}

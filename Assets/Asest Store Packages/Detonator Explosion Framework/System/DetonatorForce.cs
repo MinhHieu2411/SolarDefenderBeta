@@ -19,8 +19,8 @@ public class DetonatorForce : DetonatorComponent
 	
 	private Collider[] _colliders;
 	private GameObject _tempFireObject;
-	
-	override public void Init()
+
+    override public void Init()
 	{
 		//unused
 	}
@@ -52,16 +52,19 @@ public class DetonatorForce : DetonatorComponent
 		{
 			//tweak the position such that the explosion center is related to the explosion's direction
 			_explosionPosition = transform.position; //- Vector3.Normalize(MyDetonator().direction);
-			_colliders = Physics.OverlapSphere (_explosionPosition, radius);
+			_colliders = Physics.OverlapSphere(_explosionPosition, radius);
 
-			foreach (Collider hit in _colliders) 
+            foreach (Collider hit in _colliders) 
 			{
 				if (!hit)
 				{
 					continue;
 				}
-				
-				if (hit.GetComponent<Rigidbody>())
+                if (hit.transform.root.CompareTag("PlayerProjectile"))
+                {
+                    continue;
+                }
+                if (hit.GetComponent<Rigidbody>())
 				{
 					//align the force along the object's rotation
 					//this is wrong - need to attenuate the velocity according to distance from the explosion center			
