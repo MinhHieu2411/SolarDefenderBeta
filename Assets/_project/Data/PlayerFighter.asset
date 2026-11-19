@@ -18,8 +18,8 @@ MonoBehaviour:
   _yawForce: 2000
   _shieldStrength: 3000
   _shieldRegen: 500
-  _maxHealth: 5000
+  _maxHealth: 3000
   _blasterDamage: 100
-  _blasterLauchForce: 12000
+  _blasterLauchForce: 500
   _blasterProjectileDuration: 2
   _blasterCoolDown: 0.18

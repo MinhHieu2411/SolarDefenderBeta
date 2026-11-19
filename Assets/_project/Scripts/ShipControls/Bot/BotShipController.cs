@@ -31,6 +31,8 @@ public class BotShipController : MonoBehaviour
     [Range(-1f, 1f)]
     [SerializeField] float _yawAmount = 0f;
 
+    DamageHandler _damageHandler;
+
     iMovementControls MovementInput => _movementControls;
     iWeaponControls WeaponInput => _weaponControls;
 
@@ -38,6 +40,7 @@ public class BotShipController : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
+        _damageHandler = GetComponent<DamageHandler>();
     }
 
     void Start()
@@ -51,9 +54,14 @@ public class BotShipController : MonoBehaviour
             blaster.Init(WeaponInput, _shipData.BlasterCoolDown,_shipData.BlasterLaunchForce, _shipData.BlasterProjectileDuration, _shipData.BlasterDamage);
         }
         //_cockpitControls.Init(MovementInput);
-        
     }
-
+    private void OnEnable()
+    {
+        if (_damageHandler == null) return;
+        _damageHandler.Init(_shipData.MaxHealth);
+        _damageHandler.HealthChanged.AddListener(OnHealthChanged);
+        _damageHandler.ObjectDestroyEvent.AddListener(DestroyShip);
+    }
     void Update()
     {
         //_thrustAmount = ControlInput.thrustAmount;
@@ -84,8 +92,19 @@ public class BotShipController : MonoBehaviour
         }*/
     }
 
-    private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
         Debug.Log($"{gameObject.name} collided with {collision.collider.name}");
+    }*/
+
+
+    private void OnHealthChanged()
+    {
+        Debug.Log($"{gameObject.name} health is {_damageHandler.Health}/{_damageHandler.MaxHealth}");
     }
+    private void DestroyShip()
+    {
+        gameObject.SetActive(false);
+    }
+
 }

@@ -1,5 +1,5 @@
+
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,48 +10,64 @@ public class CameraManager : MonoBehaviour
         NoCamera = -1,
         CockpitCamera = 0,
         FollowCamera = 1,
-        EnemyFollowCamara = 2,
+        RearCamera = 2
     }
 
-    [Header("Virtal Cameras")][SerializeField] List<GameObject> _virtualCameras;
+    [Header("Virtual Cameras")]
+    [SerializeField] List<GameObject> _virtualCameras;
+
+    VirtualCameras _currentCamera = VirtualCameras.CockpitCamera;
+
+    bool _isLookingBack = false;
 
     VirtualCameras CameraKeyPressed
     {
         get
         {
-            for (int i =0; i<_virtualCameras.Count; ++i)
+            for (int i = 0; i < _virtualCameras.Count && i < 2; ++i)
             {
-                if (Input.GetKeyDown(KeyCode.Alpha1 + i)) return (VirtualCameras)i;
+                if (Input.GetKeyDown(KeyCode.Alpha1 + i))
+                    return (VirtualCameras)i;
             }
 
             return VirtualCameras.NoCamera;
         }
     }
-    // Start is called before the first frame update
+
     void Start()
     {
-        SetActiveCamera(VirtualCameras.CockpitCamera);
+        SetActiveCamera(_currentCamera);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        SetActiveCamera(CameraKeyPressed);
-    }
+        //main camera
+        VirtualCameras selectedCamera = CameraKeyPressed;
 
+        if (selectedCamera != VirtualCameras.NoCamera)
+        {
+            _currentCamera = selectedCamera;
+        }
+
+        //rear camera
+        _isLookingBack = Input.GetKey(KeyCode.LeftControl);
+
+        if (_isLookingBack)
+        {
+            //SetActiveCamera(VirtualCameras.FollowBackCamera);
+            SetActiveCamera(VirtualCameras.RearCamera);
+        }
+        else
+        {
+            SetActiveCamera(_currentCamera);
+        }
+    }
 
     void SetActiveCamera(VirtualCameras activeCamera)
     {
-        if (activeCamera == VirtualCameras.NoCamera)
+        foreach (GameObject cam in _virtualCameras)
         {
-            //Debug.Log("No camera");
-            return;
-        }
-
-        foreach(GameObject cam in _virtualCameras)
-        {
-            cam.SetActive(cam.tag.Equals(activeCamera.ToString()));
+            cam.SetActive(cam.CompareTag(activeCamera.ToString()));
         }
     }
-
 }
