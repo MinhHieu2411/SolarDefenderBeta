@@ -2,9 +2,11 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraManager : MonoBehaviour
 {
+    //[SerializeField] Image _headingPoint;
     enum VirtualCameras
     {
         NoCamera = -1,
@@ -29,7 +31,6 @@ public class CameraManager : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Alpha1 + i))
                     return (VirtualCameras)i;
             }
-
             return VirtualCameras.NoCamera;
         }
     }
@@ -61,6 +62,7 @@ public class CameraManager : MonoBehaviour
         {
             SetActiveCamera(_currentCamera);
         }
+
     }
 
     void SetActiveCamera(VirtualCameras activeCamera)

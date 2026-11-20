@@ -2,45 +2,47 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class Shield : MonoBehaviour, iDamageable
+public class Shield : MonoBehaviour
 {
-    [SerializeField] private Color _flashColor = Color.white;
-    [Range(0.25f, 1f)][SerializeField] private float _fadeOutTime = 0.3f;
+    [SerializeField] DamageHandler _damageHandler;
+    [SerializeField]  Color _flashColor = Color.white;
+    [Range(0.25f, 1f)][SerializeField]  float _fadeOutTime = 0.3f;
     [SerializeField] float _minIntensity = -10f, _maxItensity = 5f;
-
-    [SerializeField] private int _shieldHealth = 2000;
-    [SerializeField] GameObject _explosionPrefab;
-    private Renderer _renderer;
-    private Color _baseColor;
-    private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
-    private int _health;
+     Renderer _renderer;
+     Color _baseColor;
+     static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
 
     private void Awake()
     {
         _renderer = GetComponent<Renderer>();
-        _health = _shieldHealth;
         _baseColor = _renderer.material.color;
     }
-
-    public void TakeDamage(int Damage, Vector3 hitPosition)
+    public void Init(int shieldStrength)
     {
-        _health -= Damage;
-        if (_health <= 0)
-        {
-            DestroyShield();
-            return;
-        }
-        StartCoroutine(FlashAndFadeShield());
+        _damageHandler.Init(shieldStrength);
+    }
+    private void OnEnable()
+    {
+        _damageHandler.HealthChanged.AddListener(OnHealthChange);
+        _damageHandler.ObjectDestroyEvent.AddListener(DestroyShield);
+    }
+    private void OnDisable()
+    {
+        _damageHandler.HealthChanged.RemoveListener(OnHealthChange);
+        _damageHandler.ObjectDestroyEvent.RemoveListener(DestroyShield);
+
     }
 
+    void OnHealthChange()
+    {
+
+        StartCoroutine(FlashAndFadeShield());
+    }
     private void DestroyShield()
     {
         StopAllCoroutines();
-        if(_explosionPrefab != null)
-        {
-            Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
-        }
         Destroy(gameObject);
     }
 

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class BotShipController : MonoBehaviour
 {
+    [SerializeField] Shield _shield;
     [Header("Ship input controls")] [SerializeField] MovementControlsBase _movementControls;
     [SerializeField] WeaponControlsBase _weaponControls;
     [Header("Movement values")] [SerializeField] ShipDataSo _shipData;
@@ -59,7 +60,7 @@ public class BotShipController : MonoBehaviour
     {
         if (_damageHandler == null) return;
         _damageHandler.Init(_shipData.MaxHealth);
-        //_damageHandler.HealthChanged.AddListener(OnHealthChanged);
+        _damageHandler.HealthChanged.AddListener(OnHealthChanged);
         _damageHandler.ObjectDestroyEvent.AddListener(DestroyShip);
     }
     void Update()

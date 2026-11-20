@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 4413107608371754171}
   - component: {fileID: 1983420725097494232}
   - component: {fileID: 5110784819834500221}
-  m_Layer: 0
+  - component: {fileID: 4461489416298408615}
+  m_Layer: 10
   m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,9 +120,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378015c5c08a333488be7bd9c15666dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damageHandler: {fileID: 4461489416298408615}
   _flashColor: {r: 0.6839622, g: 1, b: 1, a: 0.5372549}
   _fadeOutTime: 0.3
   _minIntensity: -10
   _maxItensity: 5
-  _shieldHealth: 3000
+--- !u!114 &4461489416298408615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4198057740868096306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ff369e9eb6f03042b33865d9d730c2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _explosionPrefab: {fileID: 431082591069495247, guid: 67df4b0516e282f48be59f9b626ce2bf, type: 3}
