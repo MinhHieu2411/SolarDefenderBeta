@@ -6,10 +6,12 @@ using UnityEngine;
 
 public class Blaster : MonoBehaviour
 {
+
     [SerializeField] Projectile _projectilePrefab;
 
     [SerializeField] Transform _muzzle;
     int _damage;
+     Rigidbody _rigidbody;
     float _coolDown, _launchForce, _duration;
     float _coolDownTime;
     iWeaponControls _weaponInput;
@@ -31,13 +33,14 @@ public class Blaster : MonoBehaviour
             FireProjectile();
         }
     }
-    internal void Init(iWeaponControls weaponInput, float coolDown, float blasterLauncheForce, float blasterDuration, int blasterDamage)
+    internal void Init(iWeaponControls weaponInput, float coolDown, float blasterLauncheForce, float blasterDuration, int blasterDamage, Rigidbody rigidbody)
     {
         _weaponInput = weaponInput;
         _coolDownTime = coolDown;
         _launchForce = blasterLauncheForce;
         _duration = blasterDuration;
         _damage = blasterDamage;
+        _rigidbody = rigidbody;
     }
 
     void FireProjectile()
@@ -45,9 +48,8 @@ public class Blaster : MonoBehaviour
         _coolDown = _coolDownTime;
         Projectile projectile = Instantiate(_projectilePrefab, _muzzle.position, transform.rotation);
         projectile.gameObject.SetActive(false);
-        projectile.Init(_launchForce, _damage, _duration);
+        projectile.Init(_launchForce, _damage, _duration, _rigidbody.velocity, _rigidbody.angularVelocity);
         projectile.gameObject.SetActive(true);
-
     }
 
 }

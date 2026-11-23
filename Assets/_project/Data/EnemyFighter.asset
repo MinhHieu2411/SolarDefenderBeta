@@ -16,9 +16,9 @@ MonoBehaviour:
   _pitchForce: 2000
   _rollForce: 3000
   _yawForce: 2000
-  _shieldStrength: 3000
+  _shieldStrength: 1000
   _shieldRegen: 500
-  _maxHealth: 3000
+  _maxHealth: 2000
   _blasterDamage: 100
   _blasterLauchForce: 500
   _blasterProjectileDuration: 2

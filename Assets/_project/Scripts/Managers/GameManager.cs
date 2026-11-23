@@ -19,6 +19,11 @@ public class GameManager : MonoBehaviour
         {
             QuitGame();
         }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Cursor.visible = !Cursor.visible;
+            Cursor.lockState = Cursor.visible ? CursorLockMode.None : CursorLockMode.Confined;
+        }
     }
 
     private void QuitGame()

@@ -29,16 +29,16 @@ public class EnemyFighterDataSo : ScriptableObject
     [SerializeField]
     public int
     //shield/health
-        _shieldStrength = 3000;
+        _shieldStrength = 500;
     [SerializeField]
     public int
         _shieldRegen = 500,
-        _maxHealth = 3000;
+        _maxHealth = 1000;
     //blaster
     [Range(10, 1000)][SerializeField] public int _blasterDamage = 100;
     [Range(100f, 5000f)][SerializeField] public float _blasterLauchForce = 500f;
     [Range(1f, 10f)][SerializeField] float _blasterProjectileDuration = 2f;
-    [Range(0f, 0.5f)][SerializeField] float _blasterCoolDown = 0.18f;
+    [Range(0f, 0.5f)][SerializeField] float _blasterCoolDown = 0.2f;
 
 
     //movement

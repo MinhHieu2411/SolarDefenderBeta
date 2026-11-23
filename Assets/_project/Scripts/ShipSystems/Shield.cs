@@ -37,7 +37,6 @@ public class Shield : MonoBehaviour
 
     void OnHealthChange()
     {
-
         StartCoroutine(FlashAndFadeShield());
     }
     private void DestroyShield()

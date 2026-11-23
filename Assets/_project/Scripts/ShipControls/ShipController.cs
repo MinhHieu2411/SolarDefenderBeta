@@ -8,7 +8,7 @@ public class ShipController : MonoBehaviour
     [SerializeField] Shield _shield;
     [Header("Ship input controls")] [SerializeField] MovementControlsBase _movementControls;
     [SerializeField] WeaponControlsBase _weaponControls;
-    [Header("Movement values")] [SerializeField] ShipDataSo _shipData;
+    [Header("Player")] [SerializeField] ShipDataSo _shipData;
 
     [Header("Ship components")]
     [SerializeField] List<ShipEngine> _engines;
@@ -52,7 +52,7 @@ public class ShipController : MonoBehaviour
         }
         foreach(Blaster blaster in _blasters)
         {
-            blaster.Init(WeaponInput, _shipData.BlasterCoolDown,_shipData.BlasterLaunchForce, _shipData.BlasterProjectileDuration, _shipData.BlasterDamage);
+            blaster.Init(WeaponInput, _shipData.BlasterCoolDown,_shipData.BlasterLaunchForce, _shipData.BlasterProjectileDuration, _shipData.BlasterDamage, _rigidbody);
         }
         //_cockpitControls.Init(MovementInput);
         if (_cockpitControls != null)

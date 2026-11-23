@@ -8,7 +8,7 @@ public class BotShipController : MonoBehaviour
     [SerializeField] Shield _shield;
     [Header("Ship input controls")] [SerializeField] MovementControlsBase _movementControls;
     [SerializeField] WeaponControlsBase _weaponControls;
-    [Header("Movement values")] [SerializeField] ShipDataSo _shipData;
+    [Header("Movement values")] [SerializeField] EnemyFighterDataSo _shipData;
 
     [Header("Ship components")]
     [SerializeField] List<ShipEngine> _engines;
@@ -52,7 +52,7 @@ public class BotShipController : MonoBehaviour
         }
         foreach(Blaster blaster in _blasters)
         {
-            blaster.Init(WeaponInput, _shipData.BlasterCoolDown,_shipData.BlasterLaunchForce, _shipData.BlasterProjectileDuration, _shipData.BlasterDamage);
+            blaster.Init(WeaponInput, _shipData.BlasterCoolDown,_shipData.BlasterLaunchForce, _shipData.BlasterProjectileDuration, _shipData.BlasterDamage, _rigidbody);
         }
         //_cockpitControls.Init(MovementInput);
     }
@@ -60,6 +60,10 @@ public class BotShipController : MonoBehaviour
     {
         if (_damageHandler == null) return;
         _damageHandler.Init(_shipData.MaxHealth);
+        if (_shield != null)
+        {
+            _shield.Init(_shipData.ShieldStrength);
+        }
         _damageHandler.HealthChanged.AddListener(OnHealthChanged);
         _damageHandler.ObjectDestroyEvent.AddListener(DestroyShip);
     }

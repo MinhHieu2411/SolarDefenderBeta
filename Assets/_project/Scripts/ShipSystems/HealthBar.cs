@@ -9,31 +9,51 @@ public class HealthBar : MonoBehaviour
     [SerializeField] float _updateRate = 1f;
     [SerializeField] DamageHandler _damageHandler;
 
+    CameraManager _cameraManager;
     Transform _transform;
-    Camera _camera;
+    Transform _activeCamera;
     float _targetFillAmount;
     void Awake()
     {
         _transform = transform;
-        _camera = Camera.main;
-        if (_damageHandler == null) return;
+        _cameraManager = FindObjectOfType<CameraManager>();
+        //if (_damageHandler == null) return;
         _targetFillAmount = 1;
-        UpdateHealthBar();
+        //UpdateHealthBar();
     }
     void OnEnable()
     {
-        if (_damageHandler == null) return;
-        _damageHandler.HealthChanged.AddListener(UpdateHealthBar);
+        if (_damageHandler)
+        {
+            _damageHandler.HealthChanged.AddListener(UpdateHealthBar);
+            _damageHandler.ObjectDestroyEvent.AddListener(DisableHealthBar);
+
+        }
+        _activeCamera = _cameraManager.ActiveCamera;
+        _cameraManager.ActiveCameraChanged.AddListener(OnCameraChanged);
     }
-    private void OnDisable()
+
+    void OnDisable()
     {
-        if (_damageHandler == null) return;
-        _damageHandler.HealthChanged.RemoveListener(UpdateHealthBar);
+        if (_damageHandler) 
+        {
+            _damageHandler.HealthChanged.RemoveListener(UpdateHealthBar);
+            _damageHandler.ObjectDestroyEvent.RemoveListener(DisableHealthBar);
+        }
+        _cameraManager.ActiveCameraChanged.RemoveListener(OnCameraChanged);
     }
-    private void LateUpdate()
+     void LateUpdate()
     {
-        _transform.LookAt(_camera.transform);
-        if(_damageHandler == null || _healthBarImage == null) return;
+        if (_activeCamera)
+        {
+            Vector3 directionToCamera =_activeCamera.position - _transform.position;
+
+            if (directionToCamera.sqrMagnitude > 0.001f)
+            {
+                _transform.rotation = Quaternion.LookRotation(directionToCamera,_activeCamera.up);
+            }
+        }
+        if (!_damageHandler || _healthBarImage == null) return;
         if (Mathf.Approximately(_healthBarImage.fillAmount, _targetFillAmount)) return;
         _healthBarImage.fillAmount = Mathf.MoveTowards(_healthBarImage.fillAmount, _targetFillAmount, _updateRate * Time.deltaTime);
     }
@@ -47,4 +67,13 @@ public class HealthBar : MonoBehaviour
         }
         _targetFillAmount =(float)_damageHandler.Health/_damageHandler.MaxHealth;
     }
+    void DisableHealthBar()
+    {
+        gameObject.SetActive(false);
+    }
+     void OnCameraChanged()
+    {
+        _activeCamera = _cameraManager.ActiveCamera;
+    }
+
 }
