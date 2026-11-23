@@ -35,7 +35,8 @@ public class RadarScreen : MonoBehaviour
 
     private float _nextRefreshTime;
 
-    Transform _lockOnTarget;
+    public Transform LockOnTarget { get; set; }
+
 
     private void Awake()
     {
@@ -64,7 +65,7 @@ public class RadarScreen : MonoBehaviour
 
             _blips.Add(template);
         }
-        _lockOnTarget = null;
+        LockOnTarget = null;
     }
 
     private void Start()
@@ -85,7 +86,7 @@ public class RadarScreen : MonoBehaviour
     private void LateUpdate()
     {
         DrawBlips();
-        UIManager.Instance.UpdateTargetIndicator(_targets, _lockOnTarget ? _lockOnTarget.GetInstanceID() : -1);
+        UIManager.Instance.UpdateTargetIndicator(_targets, LockOnTarget ? LockOnTarget.GetInstanceID() : -1);
     }
 
     private void OnDisable()
@@ -102,7 +103,7 @@ public class RadarScreen : MonoBehaviour
         _targets.Clear();
         _uniqueTargets.Clear();
 
-        _lockOnTarget = null;
+        LockOnTarget = null;
         float closest = _lockOnRange;
         Vector3 playerPosition = _player.position;
 
@@ -134,7 +135,7 @@ public class RadarScreen : MonoBehaviour
         if(distance < closest && angle < _lockOnRadius)
         {
             closest = distance;
-            _lockOnTarget = target;
+            LockOnTarget = target;
         }
         return closest;
     }
