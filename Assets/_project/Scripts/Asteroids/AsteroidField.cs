@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class AsteroidField : MonoBehaviour
 {
-    [Range(100, 1000)] [SerializeField] private int _asteroidNum = 300;
-    [Range(100f, 2000f)][SerializeField] float _radius = 600f;
+    [Range(100, 1000)] [SerializeField]  int _asteroidNum = 300;
+    [Range(100f, 2000f)][SerializeField] float _radius = 300f;
     [Range(1f, 10f)][SerializeField] float _maxScale = 10f;
-    [SerializeField] private List<GameObject> _asteroidPrefabs;
+    [SerializeField]  List<GameObject> _asteroidPrefabs;
     Transform _transform;
 
-    private void Awake()
+    public float Radius => _radius;
+
+     void Awake()
     {
         _transform = transform;
     }
 
-    private void OnEnable()
+     void OnEnable()
     {
         SpawnAsteroid();
     }

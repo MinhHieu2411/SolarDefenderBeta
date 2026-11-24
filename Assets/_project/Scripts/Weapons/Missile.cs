@@ -68,25 +68,10 @@ public class Missile : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        /*if(collision.collider.TryGetComponent<iDamageable>(out var damageable))
+        if(collision.collider.TryGetComponent<iDamageable>(out var damageable))
         {
             damageable.TakeDamage(_damage, collision.GetContact(0).point);
         }
-        DestroyMissle();*/
-        Debug.Log("Missile collided with: " + collision.collider.name);
-
-        var damageable = collision.collider.GetComponentInParent<iDamageable>();
-
-        if (damageable != null)
-        {
-            damageable.TakeDamage(_damage, collision.GetContact(0).point);
-            Debug.Log("Damage applied: " + _damage);
-        }
-        else
-        {
-            Debug.LogWarning("Target does not implement iDamageable!");
-        }
-
         DestroyMissle();
     }
     void DestroyMissle()

@@ -32,10 +32,8 @@ public class UIManager : MonoBehaviour
 
         var key = target.GetInstanceID();
 
-        var indicator = _targetIndicators.FirstOrDefault(
-            i => i != null && i.Key == key
-        );
-        if (indicator != null)
+        var indicator = _targetIndicators.FirstOrDefault(i => i != null && i.Key == key);
+        if (indicator)
         {
             _targetIndicators.Remove(indicator);
             Destroy(indicator.gameObject);
