@@ -7,7 +7,7 @@ MonoImporter:
   - _projectilePrefab: {instanceID: 0}
   - _muzzle: {instanceID: 0}
   - _shipData: {fileID: 11400000, guid: 3f0ab5fe65319a246ad16fec967f8fc6, type: 2}
-  executionOrder: 0
+  executionOrder: 750
   icon: {instanceID: 0}
   userData: 
   assetBundleName: 

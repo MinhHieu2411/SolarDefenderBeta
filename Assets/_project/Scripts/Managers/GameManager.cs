@@ -2,9 +2,19 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
 
     bool ShouldQuitGame=>Input.GetKeyUp(KeyCode.Escape);
+     void Awake()
+    {
+        if(Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
+        Instance = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +34,16 @@ public class GameManager : MonoBehaviour
             Cursor.visible = !Cursor.visible;
             Cursor.lockState = Cursor.visible ? CursorLockMode.None : CursorLockMode.Confined;
         }
+    }
+
+    public void InCombat(bool inCombat)
+    {
+        if (inCombat)
+        {
+            MusicManager.Instance.PlayCombatMusic();
+        }
+
+        MusicManager.Instance.PlayPatrolMusic();
     }
 
     private void QuitGame()
