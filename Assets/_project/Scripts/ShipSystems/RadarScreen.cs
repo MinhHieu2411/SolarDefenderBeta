@@ -20,7 +20,7 @@ public class RadarScreen : MonoBehaviour
     [Range(0f, 45f)] float _lockOnRadius = 15f;
 
     [Header("Radar Settings")]
-    [SerializeField, Min(1f)]  float _radarRange = 500f;
+    [SerializeField, Min(1f)]  float _radarRange = 1000f;
     [SerializeField, Min(0.02f)]  float _refreshInterval = 0.5f;
     [SerializeField, Min(1)]  int _maxColliders = 200;
     [SerializeField, Min(0f)]  float _heightThreshold = 1f;

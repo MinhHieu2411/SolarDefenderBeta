@@ -105,7 +105,7 @@ public class BotShipController : MonoBehaviour
 
     private void OnHealthChanged()
     {
-        Debug.Log($"{gameObject.name} health is {_damageHandler.Health}/{_damageHandler.MaxHealth}");
+        //Debug.Log($"{gameObject.name} health is {_damageHandler.Health}/{_damageHandler.MaxHealth}");
     }
     private void DestroyShip()
     {

@@ -739,6 +739,7 @@ GameObject:
   - component: {fileID: 2902987844832101585}
   - component: {fileID: 6977580914771628802}
   - component: {fileID: 7730525510719643210}
+  - component: {fileID: 3222974168274416886}
   m_Layer: 12
   m_Name: Big_Launcher
   m_TagString: Untagged
@@ -812,6 +813,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3222974168274416886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594717821175201855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11a84a9bc47342f439d030d6a5025710, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _misslePrefab: {fileID: 8641064653568418776, guid: 192f53fe0e206564a8251e952bcd9a2f, type: 3}
+  _missiles: 4
+  _reload: 4
+  _coolDown: 2
+  _reloadTime: 10
+  MissileFired:
+    m_PersistentCalls:
+      m_Calls: []
+  MissileReloaded:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &760023492182646804
 GameObject:
   m_ObjectHideFlags: 0
@@ -4270,7 +4294,7 @@ Transform:
   m_GameObject: {fileID: 4740461189784935651}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.005, y: 0.844, z: 1.54}
+  m_LocalPosition: {x: 0.005, y: 0.8449, z: 1.54}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5524,6 +5548,8 @@ GameObject:
   - component: {fileID: 734612277942330212}
   - component: {fileID: 1024341082090088673}
   - component: {fileID: 8217782718840414065}
+  - component: {fileID: 8833231091635865576}
+  - component: {fileID: 3468518768663407849}
   m_Layer: 12
   m_Name: PlayerShip
   m_TagString: Untagged
@@ -5608,7 +5634,6 @@ MonoBehaviour:
   _movementControls: {fileID: 0}
   _weaponControls: {fileID: 0}
   _shipData: {fileID: 11400000, guid: 3f0ab5fe65319a246ad16fec967f8fc6, type: 2}
-  _enemyFighterData: {fileID: 0}
   _engines:
   - {fileID: 1803832988068973176}
   - {fileID: 4800721727283931598}
@@ -10416,6 +10441,49 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &8833231091635865576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6148295911378612741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 756a383c1087e254f8a7f433caf3c904, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _missileLaunchers:
+  - {fileID: 3222974168274416886}
+  - {fileID: 2626596804334249411}
+  _missileAmmo:
+  - {fileID: 0}
+  - {fileID: 0}
+  _missileDisplayPrefab: {fileID: 825030483914693668, guid: 2a7a7e2a206bfc34c9eab5c14e3163b7, type: 3}
+  _reloadedDisplay: {fileID: 0}
+  _reloadingBar: {fileID: 0}
+  _reloadRemaining: {fileID: 0}
+--- !u!114 &3468518768663407849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6148295911378612741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed2bb02e442b08b4a8a839a49d51abee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _blasters:
+  - {fileID: 714790599032012666}
+  - {fileID: 7363876365634691859}
+  _blasterBar:
+  - {fileID: 0}
+  - {fileID: 0}
+  _coolDownBar:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &6201230997072085678
 GameObject:
   m_ObjectHideFlags: 0
@@ -12589,6 +12657,7 @@ GameObject:
   - component: {fileID: 3750980132577684824}
   - component: {fileID: 7624040430969332449}
   - component: {fileID: 876980454420834339}
+  - component: {fileID: 2626596804334249411}
   m_Layer: 12
   m_Name: Big_Launcher
   m_TagString: Untagged
@@ -12662,6 +12731,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2626596804334249411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7913870580320064965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11a84a9bc47342f439d030d6a5025710, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _misslePrefab: {fileID: 8641064653568418776, guid: 192f53fe0e206564a8251e952bcd9a2f, type: 3}
+  _missiles: 4
+  _reload: 4
+  _coolDown: 2
+  _reloadTime: 10
+  MissileFired:
+    m_PersistentCalls:
+      m_Calls: []
+  MissileReloaded:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7968060836009562900
 GameObject:
   m_ObjectHideFlags: 0
