@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class Blaster : MonoBehaviour
 {
 
     [SerializeField] Projectile _projectilePrefab;
-
     [SerializeField] Transform _muzzle;
+    [SerializeField] AudioClip _fireSound;
 
     public float CapacitorChargePercentage => _capacitor / _maxCapacitor;
     public float CoolDownPercent => Mathf.Clamp(_coolDown / _coolDownTime, 0f, 1f);
@@ -20,6 +21,8 @@ public class Blaster : MonoBehaviour
     float _coolDownTime;
     iWeaponControls _weaponInput;
 
+    AudioSource _audioSource;
+
     bool CanFire
     {
         get
@@ -27,6 +30,10 @@ public class Blaster : MonoBehaviour
             _coolDown -= Time.deltaTime;
             return _coolDown <= 0f;
         }
+    }
+     void Awake()
+    {
+        _audioSource = SoundManager.Configure3DAudioSource(GetComponent<AudioSource>());
     }
     // Update is called once per frame
     void Update()
@@ -38,7 +45,7 @@ public class Blaster : MonoBehaviour
             FireProjectile();
         }
     }
-    internal void Init(iWeaponControls weaponInput, float coolDown, float blasterLauncheForce, float blasterDuration, int blasterDamage, Rigidbody rigidbody, float maxCapacitor = 1000f, float costPerShot = 40f, float rechargeRate = 20f)
+    internal void Init(iWeaponControls weaponInput, float coolDown, float blasterLauncheForce, float blasterDuration, int blasterDamage, Rigidbody rigidbody, float maxCapacitor = 1000f, float costPerShot = 20f, float rechargeRate = 40f)
     {
         _weaponInput = weaponInput;
         _coolDownTime = coolDown;
@@ -53,6 +60,10 @@ public class Blaster : MonoBehaviour
 
     void FireProjectile()
     {
+        if (_fireSound)
+        {
+            _audioSource.PlayOneShot(_fireSound, 0.6f);
+        }
         _coolDown = _coolDownTime;
         bool fullCharge = _capacitor >= _costPerShot;
         _capacitor = Mathf.Max(_capacitor - _costPerShot, 0);

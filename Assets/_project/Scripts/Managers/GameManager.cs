@@ -42,8 +42,10 @@ public class GameManager : MonoBehaviour
         {
             MusicManager.Instance.PlayCombatMusic();
         }
-
-        MusicManager.Instance.PlayPatrolMusic();
+        else
+        {
+            MusicManager.Instance.PlayPatrolMusic();
+        }
     }
 
     private void QuitGame()

@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(AudioSource))]
 public class MissileLauncher : MonoBehaviour
 {
     [SerializeField] GameObject _misslePrefab;
     [SerializeField] int _missiles = 4, _reload = 4;
     [SerializeField] float _coolDown = 2f, _reloadTime = 10f;
+    [SerializeField] AudioClip _launchSound;
 
 
     public int MissileCapacity => _missiles;
@@ -17,6 +19,7 @@ public class MissileLauncher : MonoBehaviour
     public int Reloads => _reloadRemaining;
     public bool Reloading => _missilreRemaining < 1 && _reloadRemaining > 0 && _reloadDelay > 0f;
     public UnityEvent MissileFired, MissileReloaded;
+    AudioSource _audioSource;
 
     Transform _transform;
     RadarScreen _radarScreen;
@@ -46,6 +49,7 @@ public class MissileLauncher : MonoBehaviour
         MissileReloaded = new UnityEvent();
         _transform = transform;
         _radarScreen = FindObjectOfType<RadarScreen>();
+        _audioSource = SoundManager.Configure3DAudioSource(GetComponent<AudioSource>());
     }
      void OnEnable()
     {
@@ -68,6 +72,10 @@ public class MissileLauncher : MonoBehaviour
 
      void FireMissile()
     {
+        if (_launchSound)
+        {
+            _audioSource.PlayOneShot(_launchSound, 2f);
+        }
         var missile = Instantiate(_misslePrefab, _transform.position, _transform.rotation).GetComponent<Missile>();
         if (_radarScreen)
         {

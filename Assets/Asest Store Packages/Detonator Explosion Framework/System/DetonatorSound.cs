@@ -10,7 +10,7 @@ public class DetonatorSound : DetonatorComponent {
 	
 	public float distanceThreshold = 50f; //threshold in m between playing nearSound and farSound
 	public float minVolume = .4f;
-	public float maxVolume = 1f;
+	public float maxVolume = 1.5f;
 	public float rolloffFactor = 0.5f;
 	
 	private AudioSource _soundComponent;

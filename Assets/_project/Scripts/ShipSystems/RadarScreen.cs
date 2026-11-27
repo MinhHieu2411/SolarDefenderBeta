@@ -36,6 +36,8 @@ public class RadarScreen : MonoBehaviour
     private float _nextRefreshTime;
 
     public Transform LockOnTarget { get; set; }
+    int TargetsInRange => _targets.Count;
+    bool InCombat { get; set; }
 
 
     private void Awake()
@@ -87,6 +89,18 @@ public class RadarScreen : MonoBehaviour
     {
         DrawBlips();
         UIManager.Instance.UpdateTargetIndicator(_targets, LockOnTarget ? LockOnTarget.GetInstanceID() : -1);
+        if (TargetsInRange > 0)
+        {
+            if (InCombat) return;
+            InCombat = true;
+            GameManager.Instance.InCombat(true);
+        }
+        else
+        {
+            if (!InCombat) return;
+            InCombat = false;
+            GameManager.Instance.InCombat(false);
+        }
     }
 
     private void OnDisable()
